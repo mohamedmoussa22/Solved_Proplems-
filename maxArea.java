@@ -1,19 +1,19 @@
 public class maxArea {
     public static int maxAreaa(int[] height) {
 
-        int maxArea = 0;
+        int maxArea = 0, firstIndexPointer = 0, lastIndexPointer = height.length - 1;
 
-        for (int i = 0; i < height.length; i++) {
-            for (int j = i + 1; j < height.length; j++) {
-                int x = height[i], y = height[j];
-                int calcArea = Math.min(x, y) * (j - i);
-                if (calcArea > maxArea) {
-                    maxArea = calcArea;
-                }
+        while (firstIndexPointer < lastIndexPointer) {
+            if (height[firstIndexPointer] < height[lastIndexPointer]) {
+                maxArea = Math.max(maxArea, height[firstIndexPointer] * (lastIndexPointer - firstIndexPointer));
+                firstIndexPointer++;
+
+            } else {
+                maxArea = Math.max(maxArea, height[lastIndexPointer] * (lastIndexPointer - firstIndexPointer));
+                lastIndexPointer--;
             }
 
         }
         return maxArea;
-
     }
 }
